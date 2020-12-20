@@ -4,7 +4,12 @@ import sublinks from "./data";
 import { useGlobalContext } from "./context";
 
 const Navbar = () => {
-  const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext();
+  const {
+    openSidebar,
+    openSubmenu,
+    closeSubmenu,
+    setIsSubmenuOpen,
+  } = useGlobalContext();
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
     console.log("pagi pas target", page);
@@ -13,16 +18,17 @@ const Navbar = () => {
     const bottom = tempBtn.bottom - 3;
     openSubmenu(page, { center, bottom });
   };
-  const handleSubmenu = (e) => {
-    if (!e.target.classList.contains("link-btn")) {
-      closeSubmenu();
-    }
-  };
+
   return (
     <div>
-      <img src={logo} alt="logo" onMouseOver={closeSubmenu} />
+      <div className="logo">
+        <img src={logo} alt="logo" onMouseOver={closeSubmenu} />
+      </div>
 
-      <div className="productsDiv hideDiv">
+      <div
+        className="productsDiv hideDiv"
+        onMouseOver={() => setIsSubmenuOpen(true)}
+      >
         <button className="inline products" onMouseOver={displaySubmenu}>
           products
         </button>
@@ -32,14 +38,19 @@ const Navbar = () => {
         <button className="inline products" onMouseOver={displaySubmenu}>
           company
         </button>
-
-        <div className="inline" onMouseOver={closeSubmenu}>
-          <button className=" signBtn ">Sign in </button>
-        </div>
       </div>
-      <button>
-        <img src="menu.png" className="menuImg" id="my-img" />
-      </button>
+      <div className="inline hideDiv" onMouseOver={closeSubmenu}>
+        <button className=" signBtn " onMouseOver={closeSubmenu}>
+          Sign in{" "}
+        </button>
+      </div>
+
+      <img
+        onClick={openSidebar}
+        src="menu.png"
+        className="menuImg"
+        id="my-img"
+      />
     </div>
   );
 };

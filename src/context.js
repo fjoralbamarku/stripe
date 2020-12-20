@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [page, setPage] = useState({ name: "", links: [] });
   const [location, setLocation] = useState({});
+
   const openSidebar = () => {
     setIsSidebarOpen(true);
   };
@@ -40,6 +41,8 @@ const AppProvider = ({ children }) => {
         closeSubmenu,
         page,
         location,
+        setIsSidebarOpen,
+        setIsSubmenuOpen,
       }}
     >
       {children}

@@ -6,6 +6,7 @@ const Submenu = () => {
     isSubmenuOpen,
     page: { page, links },
     location,
+    closeSubmenu,
   } = useGlobalContext();
   const divContainer = useRef(null);
   useEffect(() => {
